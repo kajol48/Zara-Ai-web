@@ -76,3 +76,16 @@ window.onload = function () {
     addMessage("Zara: " + welcome, "zara");
     speak(welcome);
 };
+function speak(text) {
+    let utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "bn-BD";
+
+    let voices = window.speechSynthesis.getVoices();
+    let zaraVoice = voices.find(voice => voice.name.includes("Google বাংলা") || voice.name.includes("Bangla"));
+
+    if (zaraVoice) {
+        utterance.voice = zaraVoice;
+    }
+
+    speechSynthesis.speak(utterance);
+}
