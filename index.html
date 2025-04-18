@@ -1,12 +1,23 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zara - তোমার AI সঙ্গী</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 <body>
-    <h1>Zara</h1>
-    <p>তোমার নিজের AI সঙ্গী</p>
-
+  <div class="container">
+      <p style="font-size: 14px; color: #aaa;">"Zara" বললেই আমি জেগে উঠবো, SK!</p>
+    <h1>Hello SK, I'm <span class="highlight">Zara</span></h1>
     <div id="chatbox">
-        <div id="messages"></div>
-        <input type="text" id="userInput" placeholder="Zara কে কিছু বলো..." />
+      <div id="messages"></div>
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="মেসেজ লেখো..." autocomplete="off" />
         <button onclick="sendMessage()">Send</button>
+      </div>
     </div>
-
-    <footer>Created with love for SK</footer>
+  </div>
+  <script src="script.js"></script>
 </body>
+</html>
