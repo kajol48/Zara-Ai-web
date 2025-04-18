@@ -89,3 +89,52 @@ function speak(text) {
 
     speechSynthesis.speak(utterance);
 }
+let recognizing = false;
+let recognition;
+
+if ('webkitSpeechRecognition' in window) {
+  recognition = new webkitSpeechRecognition();
+  recognition.lang = 'bn-BD';
+  recognition.continuous = true;
+  recognition.interimResults = false;
+
+  recognition.onstart = () => recognizing = true;
+  recognition.onend = () => recognizing = false;
+
+  recognition.onresult = function(event) {
+    const lastResult = event.results[event.results.length - 1];
+    const transcript = lastResult[0].transcript.trim().toLowerCase();
+
+    console.log("Voice Input:", transcript);
+    if (transcript.includes("জারা") || transcript.includes("zara")) {
+      speakText("জি SK, বলো?");
+      listenCommand();
+    }
+  };
+}
+
+function startWakeListener() {
+  if (!recognizing) recognition.start();
+}
+
+function listenCommand() {
+  recognition.stop();
+
+  const commandRec = new webkitSpeechRecognition();
+  commandRec.lang = 'bn-BD';
+  commandRec.continuous = false;
+  commandRec.interimResults = false;
+
+  commandRec.onresult = function(event) {
+    const command = event.results[0][0].transcript.trim();
+    appendMessage("SK (Voice)", command, "user");
+    getZaraResponse(command);
+  };
+
+  commandRec.start();
+}
+
+// পেজ লোডেই শুরু হবে
+window.onload = () => {
+  startWakeListener();
+};
